@@ -100,6 +100,60 @@ export function evaluateInterventions(
           })
         }
       }
+      
+      // Intervention 9 (Mike Johnson) — Skipping required docs
+      if (text.includes("tax returns") && (text.includes("don't necessarily need") || text.includes("don't need"))) {
+        if (!existingInterventions.some(i => i.trigger === 'doc_skipping')) {
+          newInterventions.push({
+            id: `int-${Date.now()}-9`,
+            type: 'compliance',
+            severity: 'high',
+            trigger: 'doc_skipping',
+            message: 'Self-employed income verification generally requires tax returns.\n\nDo not bypass standard documentation requirements without official underwriter approval.',
+            reasoning: 'REQUIRED DOCUMENTATION',
+            actions: ['Correct Record', 'Escalate'],
+            confidence: 0.95,
+            requiresEscalation: true,
+            status: 'suggested'
+          })
+        }
+      }
+
+      // Intervention 10 (Mike Johnson) — Rate Guarantee
+      if (text.includes("guarantee") && text.includes("rate")) {
+        if (!existingInterventions.some(i => i.trigger === 'rate_guarantee')) {
+          newInterventions.push({
+            id: `int-${Date.now()}-10`,
+            type: 'compliance',
+            severity: 'high',
+            trigger: 'rate_guarantee',
+            message: 'Illegal Rate Guarantee Detected.\n\nYou cannot guarantee a rate without locking it in through the formal system.',
+            reasoning: 'HIGH PRIORITY — COMPLIANCE',
+            actions: ['Retract Statement', 'Escalate'],
+            confidence: 0.98,
+            requiresEscalation: true,
+            status: 'suggested'
+          })
+        }
+      }
+
+      // Intervention 11 (Mike Johnson) — Appraisal Manipulation
+      if (text.includes("appraisal") && (text.includes("ensure") || text.includes("don't worry"))) {
+        if (!existingInterventions.some(i => i.trigger === 'appraisal_manipulation')) {
+          newInterventions.push({
+            id: `int-${Date.now()}-11`,
+            type: 'compliance',
+            severity: 'high',
+            trigger: 'appraisal_manipulation',
+            message: 'Appraisal independence violation.\n\nAgents cannot guarantee appraisal values or influence the appraiser.',
+            reasoning: 'CRITICAL — APPRAISAL FRAUD RISK',
+            actions: ['Retract Statement', 'Escalate immediately'],
+            confidence: 0.99,
+            requiresEscalation: true,
+            status: 'suggested'
+          })
+        }
+      }
     } else {
       const text = item.text.toLowerCase()
 
