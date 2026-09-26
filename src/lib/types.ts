@@ -21,6 +21,7 @@ export type Customer = {
   purchasePrice: number
   downPayment?: number
   downPaymentSource?: string
+  stage?: string
 }
 
 export type InterventionType = "profiling" | "product" | "objection" | "missing_info" | "compliance" | "next_action"

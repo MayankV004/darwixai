@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -13,14 +14,24 @@ export default async function PostMeetingSummary({ params }: { params: Promise<{
   const customer = mockCustomers[meeting.customerIds[0]]
 
   return (
-    <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 p-6 flex flex-col items-center">
+    <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 p-4 sm:p-6 md:p-8 flex flex-col items-center">
       <div className="container max-w-4xl w-full">
-        <header className="mb-12 text-center animate-in slide-in-from-bottom-4 fade-in duration-700">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 text-emerald-600 mb-6 shadow-inner ring-4 ring-emerald-50">
-            <CheckCircle2 className="w-10 h-10" />
+        {/* Top Brand Bar */}
+        <div className="mb-6 sm:mb-8 flex justify-between items-center pb-3 sm:pb-4 border-b border-slate-200/60">
+          <Link href="/" title="Darwix AI Home">
+            <Image src="/logo.png" alt="Darwix AI" width={120} height={28} priority className="h-6 w-auto object-contain" />
+          </Link>
+          <Link href="/dashboard" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors">
+            &larr; Back to Dashboard
+          </Link>
+        </div>
+
+        <header className="mb-8 sm:mb-12 text-center animate-in slide-in-from-bottom-4 fade-in duration-700">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-emerald-100 text-emerald-600 mb-4 sm:mb-6 shadow-inner ring-4 ring-emerald-50">
+            <CheckCircle2 className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">Meeting Complete</h1>
-          <p className="text-xl text-slate-500 mt-3 font-medium">Post-meeting review for <span className="text-slate-800">{customer.name}</span></p>
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">Meeting Complete</h1>
+          <p className="text-base sm:text-xl text-slate-500 mt-2 sm:mt-3 font-medium">Post-meeting review for <span className="text-slate-800">{customer.name}</span></p>
         </header>
 
         <div className="space-y-8 animate-in slide-in-from-bottom-8 fade-in duration-700 delay-150 fill-mode-both">
@@ -133,12 +144,12 @@ export default async function PostMeetingSummary({ params }: { params: Promise<{
                 ))}
               </ul>
             </CardContent>
-            <CardFooter className="bg-slate-50 flex justify-end gap-4 p-6 border-t border-slate-100">
-               <Link href="/dashboard">
-                  <Button variant="outline" className="shadow-sm border-slate-300 h-12 px-6 font-semibold">Dismiss</Button>
+            <CardFooter className="bg-slate-50 flex flex-col-reverse sm:flex-row justify-end gap-3 sm:gap-4 p-4 sm:p-6 border-t border-slate-100">
+               <Link href="/dashboard" className="w-full sm:w-auto">
+                  <Button variant="outline" className="w-full sm:w-auto shadow-sm border-slate-300 h-11 sm:h-12 px-6 font-semibold">Dismiss</Button>
                </Link>
-               <Link href="/dashboard">
-                  <Button className="shadow-md bg-blue-600 hover:bg-blue-700 text-white h-12 px-6 font-semibold">
+               <Link href="/dashboard" className="w-full sm:w-auto">
+                  <Button className="w-full sm:w-auto shadow-md bg-blue-600 hover:bg-blue-700 text-white h-11 sm:h-12 px-6 font-semibold">
                     <Send className="w-4 h-4 mr-2" /> Update CRM & Proceed
                   </Button>
                </Link>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -13,20 +14,23 @@ export default async function PreMeetingBrief({ params }: { params: Promise<{ id
   const customer = mockCustomers[meeting.customerIds[0]]
 
   return (
-    <div className="container mx-auto p-6 max-w-4xl">
-      <div className="mb-6">
-        <Link href="/dashboard" className="text-sm text-muted-foreground hover:underline">
+    <div className="container mx-auto p-4 sm:p-6 max-w-4xl">
+      <div className="mb-4 sm:mb-6 flex justify-between items-center pb-3 sm:pb-4 border-b border-slate-200/60">
+        <Link href="/" title="Darwix AI Home">
+          <Image src="/logo.png" alt="Darwix AI" width={120} height={28} priority className="h-6 w-auto object-contain" />
+        </Link>
+        <Link href="/dashboard" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors">
           &larr; Back to Dashboard
         </Link>
       </div>
 
-      <header className="mb-8 flex justify-between items-end border-b pb-4">
+      <header className="mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b pb-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Pre-Meeting Brief</h1>
-          <p className="text-xl text-muted-foreground mt-1">{customer.name}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Pre-Meeting Brief</h1>
+          <p className="text-lg sm:text-xl text-muted-foreground mt-0.5 sm:mt-1">{customer.name}</p>
         </div>
-        <Link href={`/meetings/${meeting.id}/live`}>
-          <Button size="lg" className="font-semibold shadow-lg">Start Meeting <ChevronRight className="w-5 h-5 ml-1" /></Button>
+        <Link href={`/meetings/${meeting.id}/live`} className="w-full sm:w-auto">
+          <Button size="lg" className="w-full sm:w-auto font-semibold shadow-lg">Start Meeting <ChevronRight className="w-5 h-5 ml-1" /></Button>
         </Link>
       </header>
 
